@@ -21,6 +21,8 @@ package com.codelanx.minigamelib.game;
 
 import com.codelanx.minigamelib.implementors.Minigame;
 import java.util.Observable;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -32,11 +34,29 @@ import org.bukkit.plugin.Plugin;
  * 
  * @param <E> The plugin used for the game
  */
-public class Game<E extends Plugin & Minigame> extends Observable {
+public abstract class Game<E extends Plugin & Minigame> extends Observable implements Listener {
 
-    private final E plugin;
+    protected final E plugin;
+    protected final int id;
 
-    public Game(E plugin) {
+    public Game(E plugin, int id) {
         this.plugin = plugin;
+        this.id = id;
     }
+
+    protected abstract void handleJoin(Player p);
+
+    public void join(Player p) {
+        this.notifyObservers();
+    }
+
+    protected abstract void handleLeave(Player p);
+
+    public void leave(Player p) {
+        this.notifyObservers();
+    }
+
+    protected abstract void restart();
+    protected abstract void dd();
+
 }
