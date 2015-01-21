@@ -19,44 +19,48 @@
  */
 package com.codelanx.minigamelib;
 
-import com.codelanx.codelanxlib.CodelanxPlugin;
-import com.codelanx.codelanxlib.listener.SubListener;
-import com.codelanx.codelanxlib.serialize.SerializationFactory;
-import com.codelanx.minigamelib.implementors.Minigame;
-import com.codelanx.minigamelib.listener.GravestoneListener;
-import com.codelanx.minigamelib.serialize.SCuboidRegion;
-import com.codelanx.minigamelib.serialize.SSignReference;
+import com.codelanx.codelanxlib.config.Config;
+import com.codelanx.codelanxlib.data.FileDataType;
+import com.codelanx.codelanxlib.data.types.Yaml;
+import org.bukkit.Material;
 
 /**
- * Class description for {@link CodelanxMinigame}
+ * Class description for {@link ConfigValue}
  *
  * @since 1.0.0
  * @author 1Rogue
  * @version 1.0.0
- * 
- * @param <E>
  */
-public abstract class CodelanxMinigame<E extends CodelanxMinigame<E>> extends CodelanxPlugin<E> implements Minigame {
+public enum ConfigValue implements Config<ConfigValue> {
 
-    public CodelanxMinigame(String command) {
-        super(command);
-        
-        SerializationFactory.registerClasses(false,
-                SCuboidRegion.class, SSignReference.class);
+    GRAVESTONES_ENABLED("gravestone.enabled", false),
+    GRAVESTONE_MATERIAL("gravestone.type", Material.NETHER_FENCE);
+
+    private static Yaml yaml;
+    private final String path;
+    private final Object def;
+
+    private ConfigValue(String path, Object def) {
+        this.path = path;
+        this.def = def;
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
+    public String getPath() {
+        return this.path;
     }
 
     @Override
-    public void onEnable() {
-        super.onEnable();
-
-        //cast, temporary ListenerManager bug
-        this.getListenerManager().registerListener((SubListener<E>) new GravestoneListener(this));
+    public Object getDefault() {
+        return this.def;
     }
 
-    
+    @Override
+    public FileDataType getConfig() {
+        if (ConfigValue.yaml == null) {
+            ConfigValue.yaml = this.init(Yaml.class);
+        }
+        return ConfigValue.yaml;
+    }
+
 }
