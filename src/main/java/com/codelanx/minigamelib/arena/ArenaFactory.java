@@ -23,7 +23,7 @@ import com.codelanx.codelanxlib.config.Config;
 import com.codelanx.codelanxlib.config.lang.Lang;
 import com.codelanx.codelanxlib.data.types.Yaml;
 import com.codelanx.codelanxlib.serialize.SLocation;
-import com.codelanx.codelanxlib.util.DebugUtil;
+import com.codelanx.codelanxlib.util.Debugger;
 import com.codelanx.minigamelib.event.ArenaPreDisposeEvent;
 import com.codelanx.minigamelib.lang.MinigameLang;
 import java.io.File;
@@ -263,7 +263,7 @@ public class ArenaFactory {
         }
         boolean success = this.plugin.getServer().unloadWorld(baseWorld, save);
         if (!success) {
-            DebugUtil.error("Failed to unload world " + baseWorld.getName() + "!", new RuntimeException());
+            Debugger.error(new RuntimeException(), "Failed to unload world %s!", baseWorld.getName());
         }
     }
 
@@ -375,7 +375,7 @@ public class ArenaFactory {
             try {
                 arena.getConfig().save();
             } catch (IOException ex) {
-                DebugUtil.error(String.format("Error saving config for arena '%s'!", arena.getName()), ex);
+                Debugger.error(ex, "Error saving config for arena '%s'!", arena.getName());
             }
             this.deleteDirectory(arena.getOriginalLocation());
             File uid = new File(arena.getWorldFolder(), "uid.dat");
@@ -385,7 +385,7 @@ public class ArenaFactory {
             try {
                 this.copyDirectory(arena.getWorldFolder(), arena.getOriginalLocation());
             } catch (IOException ex) {
-                DebugUtil.error("Error saving edited world!", ex);
+                Debugger.error(ex, "Error saving edited world!");
             }
         }
         File worldDir = arena.getWorld().getWorldFolder();
