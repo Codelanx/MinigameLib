@@ -17,11 +17,14 @@
  * You should have received a copy of the Creative Commons BY-NC-ND license
  * long with this program. If not, see <https://creativecommons.org/licenses/>.
  */
-package com.codelanx.minigamelib;
+package com.codelanx.minigamelib.internal;
 
+import com.codelanx.codelanxlib.annotation.PluginClass;
+import com.codelanx.codelanxlib.annotation.RelativePath;
 import com.codelanx.codelanxlib.config.Config;
 import com.codelanx.codelanxlib.data.FileDataType;
 import com.codelanx.codelanxlib.data.types.Yaml;
+import com.codelanx.minigamelib.MinigameLib;
 import org.bukkit.Material;
 
 /**
@@ -31,7 +34,9 @@ import org.bukkit.Material;
  * @author 1Rogue
  * @version 1.0.0
  */
-public enum ConfigValue implements Config<ConfigValue> {
+@RelativePath("config.yml")
+@PluginClass(MinigameLib.class)
+public enum ConfigValue implements Config {
 
     GRAVESTONES_ENABLED("gravestone.enabled", false),
     GRAVESTONE_MATERIAL("gravestone.type", Material.NETHER_FENCE);

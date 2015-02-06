@@ -20,12 +20,12 @@
 package com.codelanx.minigamelib.arena;
 
 import com.codelanx.codelanxlib.config.Config;
-import com.codelanx.codelanxlib.config.lang.Lang;
+import com.codelanx.codelanxlib.config.Lang;
 import com.codelanx.codelanxlib.data.types.Yaml;
 import com.codelanx.codelanxlib.serialize.SLocation;
 import com.codelanx.codelanxlib.util.Debugger;
 import com.codelanx.minigamelib.event.ArenaPreDisposeEvent;
-import com.codelanx.minigamelib.lang.MinigameLang;
+import com.codelanx.minigamelib.internal.MinigameLang;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,8 +41,6 @@ import java.util.Map;
 import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

@@ -20,10 +20,10 @@
 package com.codelanx.minigamelib.listener;
 
 import com.codelanx.codelanxlib.listener.SubListener;
-import com.codelanx.codelanxlib.util.ProtectUtil;
+import com.codelanx.codelanxlib.util.Protections;
 import com.codelanx.codelanxlib.util.Scheduler;
 import com.codelanx.minigamelib.CodelanxMinigame;
-import com.codelanx.minigamelib.ConfigValue;
+import com.codelanx.minigamelib.internal.ConfigValue;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -42,18 +42,18 @@ import org.bukkit.event.entity.PlayerDeathEvent;
  * @author 1Rogue
  * @version 0.0.1
  */
-public class GravestoneListener extends SubListener<CodelanxMinigame> {
+public class GravestoneListener extends SubListener<CodelanxMinigame<?>> {
 
     private final Set<Location> protect = new HashSet<>();
 
-    public GravestoneListener(CodelanxMinigame plugin) {
+    public GravestoneListener(CodelanxMinigame<?> plugin) {
         super(plugin);
     }
 
     @EventHandler
     @SuppressWarnings("empty-statement")
     public void onDeath(PlayerDeathEvent event) {
-        if (!ConfigValue.GRAVESTONES_ENABLED.asPrimitive(Boolean.class)) {
+        if (!ConfigValue.GRAVESTONES_ENABLED.as(boolean.class)) {
             return;
         }
         Location loc = event.getEntity().getLocation().clone();
@@ -78,11 +78,11 @@ public class GravestoneListener extends SubListener<CodelanxMinigame> {
         loc.getWorld().playEffect(loc, Effect.SMOKE, 4);
         loc.getWorld().playEffect(loc, Effect.ENDER_SIGNAL, 1);
         //lastly, protect the gravestone for 5 minutes
-        ProtectUtil.protect(loc);
-        ProtectUtil.protect(skullLoc);
+        Protections.protect(loc);
+        Protections.protect(skullLoc);
         Scheduler.runAsyncTask(() -> {
-            ProtectUtil.unprotect(loc);
-            ProtectUtil.unprotect(skullLoc);
+            Protections.unprotect(loc);
+            Protections.unprotect(skullLoc);
         }, TimeUnit.MINUTES.toSeconds(5));
     }
 

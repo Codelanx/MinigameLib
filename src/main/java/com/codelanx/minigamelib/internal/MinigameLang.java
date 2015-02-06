@@ -17,12 +17,12 @@
  * You should have received a copy of the Creative Commons BY-NC-ND license
  * long with this program. If not, see <https://creativecommons.org/licenses/>.
  */
-package com.codelanx.minigamelib.lang;
+package com.codelanx.minigamelib.internal;
 
 import com.codelanx.codelanxlib.annotation.PluginClass;
 import com.codelanx.codelanxlib.annotation.RelativePath;
-import com.codelanx.codelanxlib.config.lang.InternalLang;
-import com.codelanx.codelanxlib.config.lang.Lang;
+import com.codelanx.codelanxlib.internal.InternalLang;
+import com.codelanx.codelanxlib.config.Lang;
 import com.codelanx.codelanxlib.data.FileDataType;
 import com.codelanx.codelanxlib.data.types.Yaml;
 import com.codelanx.minigamelib.MinigameLib;
@@ -36,7 +36,7 @@ import com.codelanx.minigamelib.MinigameLib;
  */
 @PluginClass(MinigameLib.class)
 @RelativePath("minigame-lang.yml")
-public enum MinigameLang implements Lang<MinigameLang> {
+public enum MinigameLang implements Lang {
 
     ARENA_FACTORY_UNLOAD("arena.factory.unload", "Arena being unloaded!"),
     ARENA_SESSION_NO_SPAWN("arena.session.nospawn", "You have not set any spawn points!"),

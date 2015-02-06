@@ -21,7 +21,7 @@ package com.codelanx.minigamelib.arena;
 
 import com.codelanx.codelanxlib.config.Config;
 import com.codelanx.codelanxlib.serialize.SLocation;
-import com.codelanx.minigamelib.lang.MinigameLang;
+import com.codelanx.minigamelib.internal.MinigameLang;
 import com.codelanx.minigamelib.serialize.SCuboidRegion;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class EditSession extends Arena {
     }
     
     public String verifyConfig() {
-        int teams = Config.retrieve(this.getConfig(), ArenaConfig.TEAM_COUNT).asPrimitive(Integer.class);
+        int teams = Config.retrieve(this.getConfig(), ArenaConfig.TEAM_COUNT).as(int.class);
         if (this.spawns.size() <= 0) {
             return MinigameLang.ARENA_SESSION_NO_SPAWN.format();
         }
@@ -99,19 +99,19 @@ public class EditSession extends Arena {
         if (teams != this.spawns.size()) {
             return MinigameLang.ARENA_SESSION_TEAMSPAWNS.format();
         }
-        if (Config.retrieve(this.getConfig(), ArenaConfig.TEAM_SIZE).asPrimitive(Integer.class) <= 0) {
+        if (Config.retrieve(this.getConfig(), ArenaConfig.TEAM_SIZE).as(int.class) <= 0) {
             return MinigameLang.ARENA_SESSION_INT.format("Team size", "non-zero");
         }
-        if (Config.retrieve(this.getConfig(), ArenaConfig.VIP_SLOT_COUNT).asPrimitive(Integer.class) < 0) {
+        if (Config.retrieve(this.getConfig(), ArenaConfig.VIP_SLOT_COUNT).as(int.class) < 0) {
             return MinigameLang.ARENA_SESSION_INT.format("Vip slot count", "");
         }
-        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_PREWALL).asPrimitive(Integer.class) < 0) {
+        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_PREWALL).as(int.class) < 0) {
             return MinigameLang.ARENA_SESSION_INT.format("Wall countdown", "non-zero");
         }
-        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_FULLGAME).asPrimitive(Integer.class) < 0) {
+        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_FULLGAME).as(int.class) < 0) {
             return MinigameLang.ARENA_SESSION_INT.format("Wall countdown", "non-zero");
         }
-        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_PREGAME).asPrimitive(Integer.class) < 0) {
+        if (Config.retrieve(this.getConfig(), ArenaConfig.TIMER_PREGAME).as(int.class) < 0) {
             return MinigameLang.ARENA_SESSION_INT.format("Wall countdown", "non-zero");
         }
         return null;

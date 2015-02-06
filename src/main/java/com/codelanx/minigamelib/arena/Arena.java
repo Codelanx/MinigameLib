@@ -69,8 +69,8 @@ public class Arena {
         this.worldName = world.getName();
         this.worldLocation = world.getWorldFolder();
         this.config = new Yaml(new File(this.worldLocation, "config.yml"));
-        this.protect = (List<CuboidRegion>) Config.retrieve(this.config, ArenaConfig.PROTECT_LOCATIONS).get();
-        this.spawns = (List<Location>) Config.retrieve(this.config, ArenaConfig.SPAWN_LOCATIONS).get();
+        this.protect = Config.retrieve(this.config, ArenaConfig.PROTECT_LOCATIONS).as(List.class);
+        this.spawns = Config.retrieve(this.config, ArenaConfig.SPAWN_LOCATIONS).as(List.class);
         this.spectator = Config.retrieve(this.config, ArenaConfig.SPECTATE_LOCATION).as(Location.class);
         Collections.shuffle(this.spawns);
     }

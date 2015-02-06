@@ -19,7 +19,7 @@
  */
 package com.codelanx.minigamelib.arena;
 
-import com.codelanx.minigamelib.lang.MinigameLang;
+import com.codelanx.minigamelib.internal.MinigameLang;
 import org.bukkit.Location;
 import org.bukkit.World;
 

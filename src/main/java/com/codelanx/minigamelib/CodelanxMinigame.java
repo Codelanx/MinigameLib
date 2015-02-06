@@ -20,7 +20,6 @@
 package com.codelanx.minigamelib;
 
 import com.codelanx.codelanxlib.CodelanxPlugin;
-import com.codelanx.codelanxlib.listener.SubListener;
 import com.codelanx.codelanxlib.serialize.SerializationFactory;
 import com.codelanx.minigamelib.implementors.Minigame;
 import com.codelanx.minigamelib.listener.GravestoneListener;
@@ -38,24 +37,17 @@ import com.codelanx.minigamelib.serialize.SSignReference;
  */
 public abstract class CodelanxMinigame<E extends CodelanxMinigame<E>> extends CodelanxPlugin<E> implements Minigame {
 
-    public CodelanxMinigame(String command) {
-        super(command);
-        
-        SerializationFactory.registerClasses(false,
-                SCuboidRegion.class, SSignReference.class);
-    }
-
     @Override
     public void onLoad() {
-        super.onLoad();
+        SerializationFactory.registerClasses(false,
+                SCuboidRegion.class, SSignReference.class);
     }
 
     @Override
     public void onEnable() {
         super.onEnable();
 
-        //cast, temporary ListenerManager bug
-        this.getListenerManager().registerListener((SubListener<E>) new GravestoneListener(this));
+        new GravestoneListener(this);
     }
 
     

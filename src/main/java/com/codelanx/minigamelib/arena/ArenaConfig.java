@@ -24,7 +24,6 @@ import com.codelanx.codelanxlib.data.FileDataType;
 import com.codelanx.codelanxlib.data.types.Yaml;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * Class description for {@link ArenaConfig}
@@ -33,7 +32,7 @@ import org.bukkit.configuration.file.FileConfiguration;
  * @author 1Rogue
  * @version 1.0.0
  */
-public enum ArenaConfig implements Config<ArenaConfig> {
+public enum ArenaConfig implements Config {
 
     /** Number of slots reserved for VIP players */
     VIP_SLOT_COUNT("signs.vip-slots", 3),
