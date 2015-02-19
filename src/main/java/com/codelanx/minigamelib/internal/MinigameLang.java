@@ -80,7 +80,7 @@ public enum MinigameLang implements Lang {
     }
 
     @Override
-    public FileDataType getConfig() {
+    public Yaml getConfig() {
         if (MinigameLang.yaml == null) {
             MinigameLang.yaml = this.init(Yaml.class);
         }
